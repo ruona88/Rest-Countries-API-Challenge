@@ -3,12 +3,17 @@ import styled from 'styled-components'
 import {Link} from "react-router-dom"
 
 
-const Article = styled.div`
+const Article = styled.article`
   cursor: pointer;
   max-width: 400px;
   background-color: ${props => props.mode === true? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)"};
   box-shadow: ${props => !props.mode ? "1px 1px 1px 0px lightgrey": "none"};
   transition: all 0.3s linear;
+
+  @media only screen and (max-width: 649px) {
+    max-width: unset;
+    width: 100%;
+  }
 
   &:hover {
     transform: scale(1.1);
@@ -71,27 +76,28 @@ const InfoDiv = styled.div`
 `
 
 export default function CountrySnapshot (props) {
-    return (
-       <Link to = {`${props.name.toLowerCase().split(" ").join("")}`} style = {{textDecoration: "none"}} >
-        <Article mode = {props.mode} >
-          <div className = "background-image-div">
-            <img src = {props.image} className = "image" alt = ""/>
-          </div>
-          <InfoDiv mode = {props.mode} >
-            <p className = "card-name" >{props.name}</p>
-            <ol className = "card-info-container">
-              <li 
-                className = "card-info-item" >Population: <span className = "card-info-item-spec">{props.population.toLocaleString()}</span>
-              </li>
-              <li 
-                className = "card-info-item" >Region: <span className = "card-info-item-spec region" >{props.region}</span>
-              </li>
-              <li 
-              className = "card-info-item" >Capital: <span className = "card-info-item-spec" >{props.capital}</span>
-              </li>
-            </ol>
-          </InfoDiv>
-        </Article>   
-      </Link>
-    )
+
+  return (
+      <Link to = {`${props.name.toLowerCase().split(" ").join("")}`} style = {{textDecoration: "none"}} >
+      <Article mode = {props.mode} >
+        <div className = "background-image-div">
+          <img src = {props.image} className = "image" alt = {props.name} title = {props.name}/>
+        </div>
+        <InfoDiv mode = {props.mode} >
+          <p className = "card-name" >{props.name}</p>
+          <ol className = "card-info-container">
+            <li 
+              className = "card-info-item" >Population: <span className = "card-info-item-spec">{props.population.toLocaleString()}</span>
+            </li>
+            <li 
+              className = "card-info-item" >Region: <span className = "card-info-item-spec region" >{props.region}</span>
+            </li>
+            <li 
+            className = "card-info-item" >Capital: <span className = "card-info-item-spec" >{props.capital}</span>
+            </li>
+          </ol>
+        </InfoDiv>
+      </Article>   
+    </Link>
+  )
 }

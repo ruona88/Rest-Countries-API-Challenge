@@ -58,7 +58,7 @@ function MainComponent (props) {
 export default MainComponent
 
 
-const Section = styled.article`
+const Section = styled.main`
   background-color: ${props => props.mode === true ? "hsl(207, 26%, 17%)" : "hsl(0, 0%, 98%)"};
 
   .form-elements {
@@ -70,7 +70,7 @@ const Section = styled.article`
   }
 `
 
-const CountryInfo = styled.div`
+const CountryInfo = styled.section`
   padding: 0px 60px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

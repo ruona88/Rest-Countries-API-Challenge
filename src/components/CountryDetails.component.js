@@ -5,31 +5,45 @@ import {faArrowLeftLong} from "@fortawesome/free-solid-svg-icons"
 import {useParams, useNavigate} from "react-router-dom"
 import {CountryData} from "../Context/CountryDataContext"
 
+
 export default function CountryDetails (props) {
- 
-  const history = useNavigate();
 
-  const countryName = useParams();
-
-  const contextObject = useContext(CountryData);
+  const history = useNavigate(); //For Navigating backward vie Router
+  const countryName = useParams(); //Name of Country Clicked for useParams hook in Router
   
+  const contextObject = useContext(CountryData); //Contect Object imported from CountryDataContext
+
   const clickedCountry = 
-    contextObject.countryData.find((country) => 
+    contextObject.allCountries.find((country) => 
     country.name.common.split(" ").join("").toLowerCase() 
     === countryName.name.split(" ").join("").toLowerCase()); 
 
-
-    console.log(clickedCountry.borders )
-  let currency = []; //Array to hold the list of currency used by a country
-
-  for(let i = 0; i < Object.values(clickedCountry.currencies).length; i++) {//Alogrithm to loop through currencies and push to currency arr
-    let value = Object.values(clickedCountry.currencies);
-    currency.push(value[i].name);
+  const getCountryByCCN = () => {
+    let array = [];
+    if(!clickedCountry.borders) {
+      array.push();
+    } else {
+      for(let item of contextObject.allCountries) {
+        for(let border of clickedCountry.borders) {
+          if(border.toLowerCase() === item.cca3.toLowerCase()) {
+            array.push(item.name.common)
+          }
+        }
+      }  
+    } return array
   }
+
+  const getCurrency = () => {
+    let result = [];
+    for(let i = 0; i < Object.values(clickedCountry.currencies).length; i++) {
+      let value = Object.values(clickedCountry.currencies);
+      result.push(value[i].name);
+    } return result;
+  }  
 
   return (
       <Section mode = {props.mode}>
-        <p className = "btn-back" role = "button" onClick = {() => history(-1)} >
+        <p className = "btn-back" role = "button" onClick = {() => history("/")} >
           <FontAwesomeIcon icon = {faArrowLeftLong} /><span>Back</span>
         </p>
         <CountryInfo mode = {props.mode} >
@@ -50,20 +64,21 @@ export default function CountryDetails (props) {
 
               <ol>
                 <ListItem mode = {props.mode} >Top Level Domain: <span>{clickedCountry.tld}</span></ListItem>
-                <ListItem mode = {props.mode} >Currencies: <span>{currency.join(", ")}</span></ListItem>
+                <ListItem mode = {props.mode} >Currencies: <span>{getCurrency().join(", ")}</span></ListItem>
                 <ListItem mode = {props.mode} >Languages: <span>{Object.values(clickedCountry.languages).join(", ")}</span></ListItem>
               </ol>
             </OrderedListContainer>
             <BorderCountries mode = {props.mode} >
               <p>Border Countries:</p>
-              <div className = "list-border-countries">{}</div>
+              <div className = "list-border-countries" >{ getCountryByCCN().length > 0? getCountryByCCN().map((item) => (
+                <BorderCountryDetails mode = {props.mode} key = {item} onClick = {() => history("/" + item) }>{item}</BorderCountryDetails>
+              )): "none"}</div>
             </BorderCountries>
           </div>
         </CountryInfo>
       </Section>
   )
 }
-
 
 const Section = styled.section`
   padding: 0px 60px 60px 60px;
@@ -139,4 +154,29 @@ const OrderedListContainer = styled.div`
 
 const BorderCountries = styled.div`
   font-weight: 800;
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .list-border-countries {
+    display: flex;
+    max-width: 600px;
+    flex-wrap: wrap;
+    gap: 20px;
+    height: 100%;
+    align-items: center;
+  }
+`
+
+const BorderCountryDetails = styled.span`
+  display: block;
+  padding: 0.6em 1.3em;
+  text-decoration: none;
+  color: ${props => props.mode === true? "hsl(0, 0%, 98%)" : "hsl(209, 23%, 22%)"};
+  background-color: ${props => props.mode === true? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)"};
+  font-size: 0.8rem;
+  font-weight: 300;
+  cursor: pointer;
 `

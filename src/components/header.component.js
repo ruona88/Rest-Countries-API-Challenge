@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMoon, faLightbulb } from "@fortawesome/free-solid-svg-icons"
 import {Outlet} from "react-router-dom"
 
-const NavContainer = styled.div`
+const NavContainer = styled.nav`
     background-color: ${props => props.mode === true? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)"};
     padding: 20px 60px;
     display: flex;
@@ -48,7 +48,7 @@ const NavContainer = styled.div`
 export default function Header (props) {
     
     return (
-        <section >
+        <header >
             <NavContainer mode = {props.mode} >
                 <span className = "logo">Where in the world?</span>
                 <FontAwesomeIcon 
@@ -59,6 +59,6 @@ export default function Header (props) {
                 <span className = "mode"  >{props.mode? "Light Mode": "Dark Mode"}</span>
             </NavContainer>
             <Outlet />
-        </section>
+        </header>
     )
 }

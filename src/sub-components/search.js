@@ -5,8 +5,6 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import whiteSearch from "../Images/magnifying-glass-solid-white.svg"
 import darkSearch from "../Images/magnifying-glass-solid-black.svg"
 
-
-
 const Input = styled.input`
   width: 400px;
   padding: 10px 10px 10px 50px;
@@ -23,7 +21,6 @@ const Input = styled.input`
     width: 100vw;
   }
   
-
   &:focus {
     outline: none;
   }
@@ -35,27 +32,15 @@ const Input = styled.input`
 
 export default function SearchBar (props) {
 
-    // function filterbySearchQuery (e) {
-    //     const searchQuery = e.target.value.toLowerCase();
-    //     const allCountryNames = document.getElementsByClassName("card-name");
-    //     for(let item of allCountryNames) {
-    //         if(item.innerText.toLowerCase().includes(searchQuery)) {
-    //             item.parentElement.parentElement.style.display = "block"
-    //         } else {
-    //             item.parentElement.parentElement.style.display = "none"
-    //         }
-    //     }
-    // }
-
-    return (
-        <Input
-          mode = {props.mode}
-          type = "search"
-          placeholder = "Search for a Country"
-          name = "search-query"
-          className = "searchField"
-          onChange = {props.handleChange}
-        >
-        </Input>
-    )
+  return (
+      <Input
+        mode = {props.mode}
+        type = "search"
+        placeholder = "Search for a Country"
+        name = "search-query"
+        className = "searchField"
+        onChange = {props.handleChange}
+      >
+      </Input>
+  )
 }

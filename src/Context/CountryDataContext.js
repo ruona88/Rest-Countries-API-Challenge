@@ -32,6 +32,7 @@ const CountryDataContext = (props) => {
     }
 
     const contextObject = {
+        allCountries: allCountries,
         countryData: allCountriesCopy,
         applyFilterByRegion: applyFilterByRegion,
         restoreAllCountries: restoreAllCountries,

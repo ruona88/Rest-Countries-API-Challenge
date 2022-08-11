@@ -5,9 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import WhiteReactLogo from "../Images/react-brands-white.svg"
 import BlackReactLogo from "../Images/react-brands-black.svg"
 
-
-
-
 const SpinReactLogo = keyframes`
  0% { transform: rotate(0deg); }
 
@@ -16,7 +13,7 @@ const SpinReactLogo = keyframes`
  100% { transform: rotate(360deg); }
 `
 
-const LoadingContainer = styled.div`
+const LoadingContainer = styled.article`
   display: flex;
   justify-content: center;
   align-items: center;

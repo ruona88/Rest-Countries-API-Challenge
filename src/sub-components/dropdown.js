@@ -4,8 +4,6 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 
-
-
 export default function DropDown (props) {
 
   const contextObject = useContext(CountryData)
@@ -13,7 +11,7 @@ export default function DropDown (props) {
   const [dislayDropDown, setDisplayDropDown] = React.useState(false);
 
   const toggleDropDown = function () {
-      setDisplayDropDown(currentValue => !currentValue)
+    setDisplayDropDown(currentValue => !currentValue)
   }
 
   return (
