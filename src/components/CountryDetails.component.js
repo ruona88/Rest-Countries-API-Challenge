@@ -8,8 +8,8 @@ import {CountryData} from "../Context/CountryDataContext"
 
 export default function CountryDetails (props) {
 
-  const history = useNavigate(); //For Navigating backward vie Router
-  const countryName = useParams(); //Name of Country Clicked for useParams hook in Router
+  const history = useNavigate(); 
+  const countryName = useParams(); 
   
   const contextObject = useContext(CountryData); //Contect Object imported from CountryDataContext
 
